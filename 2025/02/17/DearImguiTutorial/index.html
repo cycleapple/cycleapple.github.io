@@ -154,7 +154,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="更新時間"></i>
-          2025-02-17 13:37:02
+          2025-02-17 14:39:11
         </span>
         
               <span class="post-tags">
@@ -179,16 +179,14 @@
         <p> <strong>啟發我的原文如下：</strong></p>
 <p> <a target="_blank" rel="noopener" href="https://limegame.hatenablog.com/entry/2022/11/11/131111">【Unity】Dear ImGuiの導入方法 — lime雑記</a></p>
 <p>打算寫一系列中文且符合我們 Unity 專案環境的版本，因為似乎比較少看到中文相關的資訊</p>
-<h2 id="甚麼是-Dear-ImGui"><a href="#甚麼是-Dear-ImGui" class="headerlink" title="甚麼是 Dear ImGui?"></a>甚麼是 Dear ImGui?</h2><p><img src="/images/DearImGui_00.webp" alt="示例圖片"><br>Dear ImGui 是一款即時模式 GUI 函式庫，因為靈活高效而受到廣泛使用，從知名大廠到各種獨立製作，開發過程中都曾採用它來製作內部工具和測試介面<br>(使用 Dear Imgui 的遊戲清單)</p>
+<h2 id="甚麼是-Dear-ImGui"><a href="#甚麼是-Dear-ImGui" class="headerlink" title="甚麼是 Dear ImGui?"></a>甚麼是 Dear ImGui?</h2><p><img src="https://i.imgur.com/flm8bOF.png" alt="IMG"></p>
+<p>Dear ImGui 是一款即時模式 GUI 函式庫，因為靈活高效而受到廣泛使用，從知名大廠到各種獨立製作，開發過程中都曾採用它來製作內部工具和測試介面<br>(使用 Dear Imgui 的遊戲清單)</p>
 <p>這篇文章會使用 <a target="_blank" rel="noopener" href="https://github.com/psydack/uimgui">psydack&#x2F;uimgui</a> : 一個為 Unity 開發的 Dear ImGui 封裝 (wrapper)，簡化了在 Unity 中使用 Dear ImGui 的流程，並支援<br>HDRP &#x2F; URP。</p>
-<p>以下是我們團隊的遊戲 <strong>《Iron Vulture 鐵兀鷹》</strong> 中的實際運用：</p>
-<ul>
-<li><strong>使用版本:</strong><ul>
-<li>UImgui 版本：5.0.0</li>
-<li>Unity 版本：2022.3.4f1</li>
-</ul>
-</li>
-</ul>
+<p>以下是我們團隊的遊戲 <strong>《Iron Vulture 鐵兀鷹》</strong> 中的實際運用影片：<br><a target="_blank" rel="noopener" href="https://youtu.be/ya611x2UqHg?si=yWedtN88Ay9Dg5nw"><img src="https://i.imgur.com/wees5UU.png" alt="Watch the video"></a></p>
+<hr>
+<h2 id="使用版本"><a href="#使用版本" class="headerlink" title="使用版本"></a>使用版本</h2><pre><code>* UImgui 版本：4.1.1 (#feature/multiplatform分支)
+* Unity 版本：2022.3.4f1
+</code></pre>
 <hr>
 <h2 id="安裝方式"><a href="#安裝方式" class="headerlink" title="安裝方式"></a>安裝方式</h2><ol>
 <li><p>開啟 Package Manager 中的「+」按鈕，然後選擇「Add package from git url…」</p>
@@ -196,24 +194,25 @@
 <li><p>使用以下 URL：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/psydack/uimgui.git#feature/multiplatform</span><br></pre></td></tr></table></figure></li>
 </ol>
+<p><img src="https://i.imgur.com/6IE4d82.png" alt="IMG"></p>
 <hr>
 <h2 id="產生並設定-RendererData"><a href="#產生並設定-RendererData" class="headerlink" title="產生並設定 RendererData"></a>產生並設定 RendererData</h2><ol>
-<li>在 <strong>Project</strong> 視窗中選擇：<strong>Create → Rendering → URP Universal Renderer</strong></li>
-<li>在剛剛產生的 <strong>Renderer Data</strong> 中，點擊 <strong>Add Renderer Feature</strong> 並選擇 <strong>Render Imgui</strong></li>
-<li>將產生的 <strong>Renderer Data</strong> 加入到 <strong>UniversalRenderPipelineAsset</strong>（預設檔案名稱為 <code>UniversalRP</code>）的 <strong>RendererList</strong> 中</li>
+<li>在 <strong>Project</strong> 視窗中選擇：<strong>Create → Rendering → URP Universal Renderer</strong><br><img src="https://i.imgur.com/Fmzu943.png" alt="IMG"></li>
+<li>在剛剛產生的 <strong>Renderer Data</strong> 中，點擊 <strong>Add Renderer Feature</strong> 並選擇 <strong>Render Imgui</strong><br><img src="https://i.imgur.com/aCfooXn.png" alt="IMG"></li>
+<li>將產生的 <strong>Renderer Data</strong> 加入到 <strong>UniversalRenderPipelineAsset</strong>（預設檔案名稱為 <code>UniversalRP</code>）的 <strong>RendererList</strong> 中<br><img src="https://i.imgur.com/lK912Bz.png" alt="IMG"></li>
 </ol>
 <hr>
 <h2 id="Camera-設定-URP"><a href="#Camera-設定-URP" class="headerlink" title="Camera 設定 (URP)"></a>Camera 設定 (URP)</h2><ol>
 <li>在場景中新增一個 Camera（此案例中命名為 <em>Imgui Camera</em>）</li>
 <li>設定如下：<ul>
 <li><strong>Render Type</strong> 設為 <code>Overlay</code></li>
-<li><strong>Culling Mask</strong> 設為 <code>Nothing</code></li>
 <li><strong>Renderer</strong> 設為剛剛建立的 ImguiRenderer</li>
+<li><strong>Culling Mask</strong> 設為 <code>Nothing</code><br><img src="https://i.imgur.com/fs941Yy.png" alt="IMG"></li>
 </ul>
 </li>
 <li>在 <strong>MainCamera</strong> 設定：<ul>
 <li><strong>Renderer</strong> 選擇 <code>ImguiRenderer</code></li>
-<li><strong>Stack</strong> 選擇剛剛建立的 Imgui Camera</li>
+<li><strong>Stack</strong> 選擇剛剛建立的 Imgui Camera<br><img src="https://i.imgur.com/FjPfyyY.png" alt="IMG"></li>
 </ul>
 </li>
 </ol>
@@ -225,19 +224,17 @@
 <li><strong>Render Feature</strong> 指定剛剛建立的 Render Feature</li>
 <li><strong>Camera</strong> 指定剛剛建立的 Imgui Camera（非 MainCamera）</li>
 <li><strong>Shader</strong> 指定 <code>DefaultShader</code></li>
-<li><strong>Style</strong> 指定 <code>DefaultStyle</code></li>
+<li><strong>Style</strong> 指定 <code>DefaultStyle</code><br><img src="https://i.imgur.com/1TiVFjh.png" alt="IMG"></li>
 </ul>
 </li>
 </ol>
-<blockquote>
-<p><strong>注意</strong>：若找不到 <code>DefaultShader</code> 和 <code>DefaultStyle</code>，請點擊右上角的小眼睛圖示，顯示 Package 中的資源。</p>
-</blockquote>
+<p><strong>注意</strong>：若找不到 <code>DefaultShader</code> 和 <code>DefaultStyle</code>，請點擊右上角的小眼睛圖示，顯示 Package 中的資源。<br><img src="https://i.imgur.com/Bv20Tof.png" alt="IMG"></p>
 <hr>
 <h2 id="撰寫一個-MonoBehaviour-來測試"><a href="#撰寫一個-MonoBehaviour-來測試" class="headerlink" title="撰寫一個 MonoBehaviour 來測試"></a>撰寫一個 MonoBehaviour 來測試</h2><ol>
 <li><p>新增一個 MonoBehaviour，並將以下程式碼掛載在場景中的物件上：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UImGui;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ImGuiManager</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnEnable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        UImGuiUtility.Layout += OnLayout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnDisable</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        UImGuiUtility.Layout -= OnLayout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnLayout</span>(<span class="params">UImGui.UImGui uImGui</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 顯示 Demo 視窗</span></span><br><span class="line">        ImGuiNET.ImGui.ShowDemoWindow();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>進入 <strong>Play Mode</strong> 時，即可顯示 Demo 視窗</p>
+<li><p>進入 <strong>Play Mode</strong> 時，即可顯示 Demo 視窗<br><img src="https://i.imgur.com/Ikex2mb.png" alt="IMG"></p>
 </li>
 </ol>
 
@@ -255,7 +252,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="更新時間"></i>
-              2025-02-17 13:37:02
+              2025-02-17 14:39:11
             </span>
             
                   <span class="post-tags">
@@ -290,7 +287,7 @@
     <div class="title">目錄</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9A%E9%BA%BC%E6%98%AF-Dear-ImGui"><span class="toc-text">甚麼是 Dear ImGui?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D%E6%96%B9%E5%BC%8F"><span class="toc-text">安裝方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A2%E7%94%9F%E4%B8%A6%E8%A8%AD%E5%AE%9A-RendererData"><span class="toc-text">產生並設定 RendererData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Camera-%E8%A8%AD%E5%AE%9A-URP"><span class="toc-text">Camera 設定 (URP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%B4%E6%99%AF%E4%B8%AD%E8%A8%AD%E5%AE%9A-UImGui"><span class="toc-text">場景中設定 UImGui</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%B0%E5%AF%AB%E4%B8%80%E5%80%8B-MonoBehaviour-%E4%BE%86%E6%B8%AC%E8%A9%A6"><span class="toc-text">撰寫一個 MonoBehaviour 來測試</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9A%E9%BA%BC%E6%98%AF-Dear-ImGui"><span class="toc-text">甚麼是 Dear ImGui?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%89%88%E6%9C%AC"><span class="toc-text">使用版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9D%E6%96%B9%E5%BC%8F"><span class="toc-text">安裝方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A2%E7%94%9F%E4%B8%A6%E8%A8%AD%E5%AE%9A-RendererData"><span class="toc-text">產生並設定 RendererData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Camera-%E8%A8%AD%E5%AE%9A-URP"><span class="toc-text">Camera 設定 (URP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A0%B4%E6%99%AF%E4%B8%AD%E8%A8%AD%E5%AE%9A-UImGui"><span class="toc-text">場景中設定 UImGui</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%B0%E5%AF%AB%E4%B8%80%E5%80%8B-MonoBehaviour-%E4%BE%86%E6%B8%AC%E8%A9%A6"><span class="toc-text">撰寫一個 MonoBehaviour 來測試</span></a></li></ol>
       
     </div>
   </div>
